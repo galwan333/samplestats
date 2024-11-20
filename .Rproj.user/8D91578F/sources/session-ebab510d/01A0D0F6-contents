@@ -1,0 +1,16 @@
+dat <- data(NHANES)
+str(NHANES)
+plot(NHANES$Weight, NHANES$Pulse)
+plot(NHANES$Marijuana,NHANES$Pulse )
+x = NHANES$Pulse[NHANES$Marijuana=="Yes"]
+y = NHANES$Pulse[NHANES$Marijuana=="No"]
+t.test(x,y )
+plot(NHANES$Marijuana,NHANES$Pulse )
+x = NHANES$Pulse[NHANES$Diabetes=="Yes"]
+y = NHANES$Pulse[NHANES$Diabetes=="No"]
+t.test(x,y )
+
+NHANES
+
+lm(NHANES$Pulse~NHANES$Marijuana)
+
