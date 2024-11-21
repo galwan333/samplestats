@@ -14,7 +14,7 @@ The package here is called "samplestats" which includes a variety of functions. 
 
 -Coefficient of variation: Gives the coefficient of variation of the data, which is how spread the data is around the mean of the data (quotient of the standard devitation of the data and the mean of the data). Can refer to the function coefficient_of_variation.R in the R folder. 
 
-Note: For some persepctive, the first moment is the mean of the data, and the second central moment is the variance. Other moments and central moments require more in depth statisical investigation. 
+Note: For some persepctive, the first moment is the mean of the data, and the second central moment is the variance. These concepts are explained more in the help pages and in the vignettes folder. Other moments and central moments require more in depth statisical investigation. 
 
 ## USAGE IN R
 
