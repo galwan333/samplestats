@@ -26,4 +26,7 @@ library(samplestats)
 After you run the lines of code above you should be able to use the functions of the package on your local device. 
 
 
+## License
+
+Licensed under MIT License. 
 
