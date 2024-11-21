@@ -3,7 +3,7 @@
 #' @description
 #' This is a function find a given percentile based off the users inputted data
 #' @details
-#' calculations are self-explanatory (see comments below), but we must ensure that the parameters are appropriate otherwise an error will be thrown
+#' Is the percentile in the data that we want to find and is 0.5 (median) if no parameter is passed
 #'
 #' @return The numerical value of the percentile
 #'
@@ -35,13 +35,6 @@ percentiles = function(data, percentile = 0.5){
   #gets the number of observations in the data
   n = length(data)
 
-
-  #ensures all of the data is numeric (this package only deals with numeric data)
-  for(i in 1:n){
-    if(!is.numeric(data[i])){
-      stop("ERROR: make sure all of the data is numeric data")
-    }
-  }
 
   #index of the percentile within the sorted data
   percentile_postion = 1 + percentile *(n-1)

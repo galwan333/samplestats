@@ -11,11 +11,11 @@
 #' @param data Is a list/vector of only numeric values
 #'
 #' @examples
-#' mode(c(1,2,3,3,1,3,44,6))
+#' mode_finder(c(1,2,3,3,1,3,44,6))
 #'
 #' @export
 #'
-mode = function(data){
+mode_finder = function(data){
 
   # ensures there is data being passed through
   if(length(data) == 0){
@@ -24,14 +24,6 @@ mode = function(data){
 
   n = length(data)
 
-  # ensures all of the data is numeric (this package only deals with numeric data)
-  for(i in 1:n){
-
-    if(!is.numeric(data[i])){
-      stop("ERROR: make sure all of the data is numeric data")
-    }
-
-  }
 
   # creates a table of number of observations per unique value
   table_data = table(data)
@@ -48,4 +40,3 @@ mode = function(data){
 
 }
 
-mode(c(1,2,2,2,2,2))

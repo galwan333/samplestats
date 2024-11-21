@@ -1,0 +1,274 @@
+---
+title: "Demonstration of samplestats functions"
+author: "Gabriel Alwan"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Demonstration of samplestats functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+In this file we demonstrate how each of the functions in the `samplestats` package work. We explain when and how and to use the various functions. We do want to ensure the correctness of the the functions, so we compare the outputs to already existing functions in base R and in the package `EnvStats`. Link for information on this package can be found here https://cran.r-project.org/web/packages/EnvStats/index.html. We notice that the implementation of our functions are accurate for our test cases. We also use the package `modeest` for testing our mode_finder() function. Info about this package is found at https://cran.r-project.org/web/packages/modeest/index.html. 
+
+We also want to ensure that our functions are efficient, so we use the function `bench::mark()` from the package `bench`. Below we do see that our functions are efficient, and sometimes even more efficient than the other functions we're comparing to. 
+
+
+We will use the sample artificially made data to demonstrate the functionality. We use this by generating data from the `rnorm()` function. We create that data below for each test case. We also load in all the needed packages below. The data is arbitrarily create, which is fine for demonstrating the usage of the package. In reality, these functions should be used for meaningful data. 
+
+
+
+```{r}
+#install packages
+install.packages("EnvStats")
+install.packages("samplestats")
+install.packages("bench")
+install.packages("samplestats")
+install.packages("modeest")
+```
+
+```{r}
+#load packages
+library(samplestats)
+library(EnvStats)
+library(bench)
+library(modeest)
+
+```
+
+
+**IQR FUNCTION**
+
+First we demonstrate the use of the `iqr()` function. 
+
+**CORRECTNESS**
+
+We simulate data below and compare our result to the `IQR()` function from base R. We see that the two are equal below. 
+
+
+```{r}
+
+set.seed(400)
+dat = rnorm(50, mean = 1000, sd = 2)
+x = iqr(dat) #our function
+y = IQR(dat) #what we expect
+print(all.equal(x,y))
+
+
+```
+
+
+**EFFICIENCY**
+
+We now test the efficiency of our function. Below we see that the two functions are relatively similar in performance time. 
+
+```{r}
+set.seed(400)
+dat = rnorm(50, mean = 1000, sd = 2)
+efficiency =  bench::mark(iqr(dat),IQR(dat))
+print(efficiency)
+```
+
+
+**MODE FUNCTION**
+
+First we demonstrate the use of the `mode_finder()` function. 
+
+**CORRECTNESS**
+
+We simulate data below and compare our result to the `mfv()` function from the package `modeest`. We see that the two are equal below. 
+
+
+```{r}
+
+dat = c(1:100, 100, 100, 100)
+x = mode_finder(dat) #our function
+y = mfv(dat) #what we expect
+print(all.equal(x,y))
+
+```
+
+
+**EFFICIENCY**
+
+We now test the efficiency of our function. Below we see that the two functions are relatively similar in performance time.
+
+```{r}
+
+efficiency =  bench::mark(mode_finder(dat),mfv(dat))
+print(efficiency)
+
+```
+
+
+**MOMENTS FUNCTION**
+
+First we demonstrate the use of the `moments()` function. 
+
+**CORRECTNESS**
+
+We simulate data below and compare our result to the `mean()` function from base R. We do this because the first moment is equivalent to the mean. We see that the two are equal below. 
+
+
+```{r}
+
+set.seed(400)
+dat = rnorm(100, mean = 1000, sd = 2)
+x = moments(dat, moment = 1) #our function
+y = mean(dat) #what we expect
+print(all.equal(x,y))
+
+
+
+```
+
+We also want to ensure the function is correct by comparing our function to higher order moments. We use the `moment()` function from the `EnvStat` package for comparison of the 3rd moment. 
+
+```{r}
+
+set.seed(400)
+dat = rnorm(100, mean = 1000, sd = 2)
+x = moments(dat, moment = 3) #our function
+y = moments::moment(dat, order = 3) #what we expect
+print(all.equal(x,y))
+
+
+
+```
+
+
+**EFFICIENCY**
+
+We now test the efficiency of our function. Below we see that the two functions are relatively similar in performance time. 
+
+```{r}
+
+efficiency =  bench::mark(moments(dat, moment = 1),mean(dat) )
+print(efficiency)
+
+```
+
+**PERCENTILES FUNCTION**
+
+First we demonstrate the use of the `percentiles()` function.
+
+**CORRECTNESS**
+
+We simulate data below and compare our result to the `quantile()` function from base R. We have to use `unname()` in the code below to extract the actual value.  We see that the two are equal below. We test out the 77th percentile. 
+
+```{r}
+set.seed(40)
+dat = rnorm(20, mean = 2000000, sd = 3)
+x = percentiles(dat, 0.77) #our function
+y = unname(quantile(dat, probs = 0.77))#what we expect
+print(all.equal(x,y))
+
+
+
+```
+
+We also want to test out the 50th percentile, which can be tested with the `median()` function. 
+
+```{r}
+set.seed(40)
+dat = rnorm(20, mean = 2000000, sd = 3)
+x = percentiles(dat, 0.5) #our function
+y = median(dat)#what we expect
+print(all.equal(x,y))
+
+
+
+```
+
+**EFFICIENCY**
+
+We now test the efficiency of our function. Below we see that the two functions are relatively similar in performance time.
+
+```{r}
+set.seed(40)
+dat = rnorm(20, mean = 2000000, sd = 3)
+efficiency =  bench::mark(percentiles(dat, 0.75),unname(quantile(dat, probs = 0.75)))
+print(efficiency)
+
+```
+
+**CENTRAL MOMENTS FUNCTION**
+
+We demonstrate the use of the `central_moments()` function. 
+
+**CORRECTNESS**
+
+We will test this function by comparing our result to want to make sure the second central moment is correct. In statistics, the second central moment is the variance, so we compare to the `var()` function. 
+
+
+```{r}
+
+set.seed(1)
+dat = rnorm(1000, mean = 100, sd = 2)
+x = central_moments(dat, 2) #our function
+y = var(dat) #what we expect
+print(all.equal(x,y))
+
+
+```
+
+
+Below we purposely choose a data set that has 0 skew in order to test the functionality for more extreme cases. There is no built in central moments function, but we know that the standardized version of a central moment is the skewness, which can be calculated using the function `skewness().` Since this is standardized, we must multiply the result by the cube (because it's the third moment) of the skewness in order to compare to the third central moment. 
+
+```{r}
+
+set.seed(1)
+dat = c(1,2,3,4,5,6,7,8)
+x = central_moments(dat, 3) #our function
+y = moments::skewness(dat)*(sd(dat)**3) #what we expect
+print(all.equal(x,y))
+
+
+```
+
+
+**EFFICIENCY**
+
+We now test the efficiency of our function. Below we see that the two functions are relatively similar in performance time. 
+
+```{r}
+library(bench)
+efficiency =  bench::mark(central_moments(dat, 2),var(dat))
+print(efficiency)
+
+
+```
+
+**COEFFICIENT OF VARIATION FUNCTION**
+
+First we demonstrate the use of the `coefficient_of_variation()` function. 
+
+**CORRECTNESS**
+
+We compare out results to the function `cv()` from the `EnvStat` package. We notice that the values are similar.
+
+
+```{r}
+
+set.seed(1)
+dat = rnorm(1000, mean = 10000, sd = 1)
+x = coefficient_of_variation(dat) #our function
+y = cv(dat) #what we expect
+print(all.equal(x,y))
+
+```
+
+
+**EFFICIENCY**
+
+We now test the efficiency of our function. Below we see that the two functions are relatively similar in performance time. 
+
+
+```{r}
+set.seed(1)
+dat = rnorm(1000, mean = 10000, sd = 1)
+efficiency =  bench::mark(coefficient_of_variation(dat), cv(dat))
+print(efficiency)
+```
+
