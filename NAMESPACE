@@ -3,6 +3,6 @@
 export(central_moments)
 export(coefficient_of_variation)
 export(iqr)
-export(mode)
+export(mode_finder)
 export(moments)
 export(percentiles)

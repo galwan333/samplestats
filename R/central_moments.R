@@ -3,7 +3,7 @@
 #' @description
 #' This is a function that computes a given moment based off user input (first moment by default)
 #' @details
-#' calculations are self-explanatory (see comments below), but we must ensure that the parameters are appropriate otherwise an error will be thrown
+#' Is the given moment that will be calculated (1 = first moment, 2= second moment, etc.) and is 1 if no parameter is passed
 #'
 #' @return The calculated moment in the form of a numeric value
 #'
@@ -35,13 +35,6 @@ central_moments = function(data, moment = 1){
 
   #number of observations in the data
   n  = length(data)
-
-  #ensures all of the data is numeric (this package only deals with numeric data)
-  for(i in 1:n){
-    if(!is.numeric(data[i])){
-      stop("ERROR: make sure all of the data is numeric data")
-    }
-  }
 
   #makes sure there are enough observations to calculate the given central moment
   if(moment > n){

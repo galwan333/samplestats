@@ -18,7 +18,7 @@ The numerical value of the percentile
 This is a function find a given percentile based off the users inputted data
 }
 \details{
-calculations are self-explanatory (see comments below), but we must ensure that the parameters are appropriate otherwise an error will be thrown
+Is the percentile in the data that we want to find and is 0.5 (median) if no parameter is passed
 }
 \examples{
 percentiles(c(2:200))

@@ -18,7 +18,7 @@ The calculated moment in the form of a numeric value
 This is a function that computes a given moment based off user input (first moment by default)
 }
 \details{
-calculations are self-explanatory (see comments below), but we must ensure that the parameters are appropriate otherwise an error will be thrown
+
 }
 \examples{
 moments(c(2,3,4,5,1,2,3,44,5,55,100,100))
