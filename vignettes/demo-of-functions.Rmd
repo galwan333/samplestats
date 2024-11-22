@@ -2,6 +2,8 @@
 title: "Demonstration of samplestats functions"
 author: "Gabriel Alwan"
 output: rmarkdown::html_vignette
+description: >
+  In this file you'll learn all of the basic functionalities of all of the functions within the samplestats package.
 vignette: >
   %\VignetteIndexEntry{Demonstration of samplestats functions}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,6 +23,7 @@ We will use the sample artificially made data to demonstrate the functionality. 
 
 ```{r}
 #install packages
+install.packages("devtools")
 install.packages("EnvStats")
 install.packages("samplestats")
 install.packages("bench")
@@ -30,6 +33,7 @@ install.packages("modeest")
 
 ```{r}
 #load packages
+devtools::install_github("galwan333/samplestats")
 library(samplestats)
 library(EnvStats)
 library(bench)

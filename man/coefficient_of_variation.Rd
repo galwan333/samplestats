@@ -16,7 +16,7 @@ The calculated coefficient of variation
 This is a function that calculates the coefficient of variation
 }
 \details{
-This is a function that calculates the coefficient of variation (sd/mean * 100) from a list of data
+This is a function that calculates the coefficient of variation (sd/mean) from a list of data
 }
 \examples{
 coefficient_of_variation(c(1:100))
