@@ -12,22 +12,40 @@ vignette: >
 
 
 
-In this file we demonstrate how each of the functions in the `samplestats` package work. We explain when and how and to use the various functions. We do want to ensure the correctness of the the functions, so we compare the outputs to already existing functions in base R and in the package `EnvStats`. 
+In this file we demonstrate how each of the functions in the `samplestats` package work. 
+
+We explain when and how and to use the various functions. 
+
+We do want to ensure the correctness of the the functions, so we compare the outputs to already existing functions in base R and in the package `EnvStats`. 
 
 Link for information on this package can be found here https://cran.r-project.org/web/packages/EnvStats/index.html.
 
 
-We notice that the implementation of our functions are accurate for our test cases. We also use the package `modeest` for testing our mode_finder() function. 
+We notice that the implementation of our functions are accurate for our test cases. 
+
+
+We also use the package `modeest` for testing our mode_finder() function. 
 
 Info about this package is found at https://cran.r-project.org/web/packages/modeest/index.html. 
 
-We also want to ensure that our functions are efficient, so we use the function `bench::mark()` from the package `bench`. Below we do see that our functions are efficient, and sometimes even more efficient than the other functions we're comparing to. 
+We also want to ensure that our functions are efficient, so we use the function `bench::mark()` from the package `bench`. 
+
+Below we do see that our functions are efficient, and sometimes even more efficient than the other functions we're comparing to. 
 
 
-We will use the sample artificially made data to demonstrate the functionality. We use this by generating data from the `rnorm()` function. We create that data below for each test case. We also load in all the needed packages below. 
+We will use the sample artificially made data to demonstrate the functionality. 
 
 
-The data is arbitrarily created, which is fine for demonstrating the usage of the package. In reality, these functions should be used for meaningful data. 
+We use this by generating data from the `rnorm()` function. 
+
+
+We create that data below for each test case. We also load in all the needed packages below. 
+
+
+The data is arbitrarily created, which is fine for demonstrating the usage of the package. 
+
+
+In reality, these functions should be used for meaningful data. 
 
 
 
